@@ -18,14 +18,17 @@ except ImportError:
 from gui.window import create_pipeline_window, display_image
 from processing.image_processor import convert_to_grayscale, detect_edges
 
+# Always resolve output paths relative to project root folder (DSQUAD)
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
 def run_pipeline_test():
     """
     Executes an end-to-end baseline smoke test connecting GUI, 
     Image Processing, and Visualization modules for CG & IP Project.
     """
     print("[INFO] Starting CG & IP Baseline Smoke Test Pipeline...")
-    output_png = "pipeline_test_output.png"
-    output_bmp = "pipeline_test_output.bmp"
+    output_png = os.path.join(PROJECT_ROOT, "pipeline_test_output.png")
+    output_bmp = os.path.join(PROJECT_ROOT, "pipeline_test_output.bmp")
     
     if HAS_OPENCV:
         # Create 800x500 black canvas using OpenCV
