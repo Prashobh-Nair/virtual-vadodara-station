@@ -1,4 +1,11 @@
+import sys
 import os
+
+# Add src folder to sys.path so imports work flawlessly in all IDEs & Play button
+SRC_DIR = os.path.abspath(os.path.dirname(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(SRC_DIR, '..'))
+if SRC_DIR not in sys.path:
+    sys.path.insert(0, SRC_DIR)
 
 try:
     import cv2
@@ -17,9 +24,6 @@ except ImportError:
 
 from gui.window import create_pipeline_window, display_image
 from processing.image_processor import convert_to_grayscale, detect_edges
-
-# Always resolve output paths relative to project root folder (DSQUAD)
-PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 def run_pipeline_test():
     """
