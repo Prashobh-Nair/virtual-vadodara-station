@@ -10,11 +10,6 @@ except ImportError:
 def display_image(window_name: str, img, wait_key: int = 0) -> None:
     """
     Displays an image using OpenCV GUI window.
-    
-    Args:
-        window_name: Title of the GUI window.
-        img: Input image array.
-        wait_key: Key delay in milliseconds (0 for indefinite).
     """
     if HAS_OPENCV and isinstance(img, np.ndarray):
         try:
@@ -27,27 +22,33 @@ def display_image(window_name: str, img, wait_key: int = 0) -> None:
     
     print(f"[GUI Fallback] Rendering output window '{window_name}' (Headless / Terminal mode)")
 
-def create_pipeline_window(title: str = "Pipeline Test", width: int = 300, height: int = 300):
+def create_pipeline_window(title: str = "Pipeline Test", width: int = 800, height: int = 500):
     """
-    Creates a baseline dummy image canvas with text for GUI pipeline testing.
+    Creates a styled baseline dummy image canvas with team details matching reference specification.
     """
     if HAS_OPENCV:
         canvas = np.zeros((height, width, 3), dtype=np.uint8)
-        cv2.putText(
-            canvas, 
-            'CG & IP Pipeline OK', 
-            (20, height // 2), 
-            cv2.FONT_HERSHEY_SIMPLEX, 
-            0.7, 
-            (0, 255, 0), 
-            2
-        )
+        
+        cv2.putText(canvas, 'Virtual Vadodara Railway Station', (50, 70), 
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 0), 2, cv2.LINE_AA)
+        cv2.putText(canvas, 'Baseline Pipeline Test', (50, 120), 
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255, 255, 255), 2, cv2.LINE_AA)
+        cv2.putText(canvas, 'Group Members:', (50, 190), 
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2, cv2.LINE_AA)
+        cv2.putText(canvas, '1. Mayank Adi 24000858', (90, 240), 
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.75, (255, 255, 255), 2, cv2.LINE_AA)
+        cv2.putText(canvas, '2. Zeel Vasoya 24001018', (90, 290), 
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.75, (255, 255, 255), 2, cv2.LINE_AA)
+        cv2.putText(canvas, '3. Prashobh Nair 24001026', (90, 340), 
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.75, (255, 255, 255), 2, cv2.LINE_AA)
+        cv2.putText(canvas, 'Status : Pipeline OK', (50, 430), 
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.85, (0, 255, 0), 2, cv2.LINE_AA)
         return canvas
     
     # Pure Python canvas fallback
     canvas = [[[0, 0, 0] for _ in range(width)] for _ in range(height)]
-    # Draw simple representation in center
-    mid_y = height // 2
-    for x in range(20, width - 20):
-        canvas[mid_y][x] = [0, 255, 0]
+    # Accent top border green
+    for x in range(width):
+        canvas[0][x] = [0, 255, 0]
+        canvas[1][x] = [0, 255, 0]
     return canvas
