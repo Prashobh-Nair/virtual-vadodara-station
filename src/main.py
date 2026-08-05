@@ -8,8 +8,8 @@ if SRC_DIR not in sys.path:
     sys.path.insert(0, SRC_DIR)
 
 try:
-    import cv2
-    import numpy as np
+    import cv2  # type: ignore
+    import numpy as np  # type: ignore
     HAS_OPENCV = True
 except ImportError:
     HAS_OPENCV = False
@@ -17,7 +17,7 @@ except ImportError:
     np = None
 
 try:
-    from PIL import Image, ImageDraw, ImageFont
+    from PIL import Image, ImageDraw, ImageFont  # type: ignore
     HAS_PIL = True
 except ImportError:
     HAS_PIL = False
